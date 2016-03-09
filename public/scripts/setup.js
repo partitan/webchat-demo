@@ -2,7 +2,7 @@ var pureCloudSession = null;
 
 var environments = {
     na : {
-        clientId: "",
+        clientId: "b9602a86-8bfc-4f45-8fe5-3ced3c5de138",
         name: "North America",
         environment: "mypurecloud.com"
     },
