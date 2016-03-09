@@ -70,37 +70,43 @@ $(document).ready(function(){
         $("#orgName").val() !== "" &&
         $("#queueName").val() !== ""){
             $('#collapseOne').collapse('hide');
-            return;
     }
 
+    pureCloudSession = new PureCloudSession(environments[$('#regionSelect').val()].environment);
+    if(pureCloudSession.hasAuthorizationToken()){
+        getOrgDetails();
+    }
 
     $("#getorgsettings").click(function(){
-        $('#queueNameSelect').show();
-        $("#queueNameSelect").prop('disabled', true);
-        $('#queueName').hide();
-        $("#queueLoading").show();
 
-        $('#queueNameSelect').empty();
 
         var clientId = environments[$('#regionSelect').val()].clientId;
 
-        pureCloudSession = new PureCloudSession(environments[$('#regionSelect').val()].environment);
-        pureCloudSession.authorize(clientId,window.location.href.replace(/#/,'')).done(function(){
-            var configurationApi = new ConfigurationApi(pureCloudSession);
-            var routingApi = new RoutingApi(pureCloudSession);
-
-            configurationApi.getOrganization().done(function(orgDetails){
-                $("#orgName").val(orgDetails.thirdPartyOrgName);
-                $('#orgName').attr('readonly', true);
-                $("#orgId").val(orgDetails.thirdPartyOrgId);
-                $('#orgId').attr('readonly', true);
-            });
-
-            routingApi.getQueues().done(processQueues);
-        });
+        pureCloudSession.environment(environments[$('#regionSelect').val()].environment);
+        pureCloudSession.authorize(clientId,window.location.href.replace(/#/,'')).done(getOrgDetails);
 
         event.preventDefault();
         return false;
     });
 
 });
+
+function getOrgDetails(){
+    $('#queueNameSelect').show();
+    $("#queueNameSelect").prop('disabled', true);
+    $('#queueName').hide();
+    $("#queueLoading").show();
+
+    $('#queueNameSelect').empty();
+    var configurationApi = new ConfigurationApi(pureCloudSession);
+    var routingApi = new RoutingApi(pureCloudSession);
+
+    configurationApi.getOrganization().done(function(orgDetails){
+        $("#orgName").val(orgDetails.thirdPartyOrgName);
+        $('#orgName').attr('readonly', true);
+        $("#orgId").val(orgDetails.thirdPartyOrgId);
+        $('#orgId').attr('readonly', true);
+    });
+
+    routingApi.getQueues().done(processQueues);
+}
