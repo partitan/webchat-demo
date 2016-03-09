@@ -1,0 +1,8 @@
+{
+  "name": "ChatDemoSite",
+  "dependencies": {
+    "bootstrap": "3.3.6",
+    "chance" : "*",
+    "purecloud-api": "0.23.0"
+  }
+}
