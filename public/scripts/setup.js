@@ -6,6 +6,21 @@ var environments = {
         name: "North America",
         environment: "mypurecloud.com"
     },
+    anz : {
+        clientId: "",
+        name: "Australia/New Zealand",
+        environment: "mypurecloud.com.au"
+    },
+    eu : {
+        clientId: "",
+        name: "EU (Ireland)",
+        environment: "mypurecloud.ie"
+    },
+    jp : {
+        clientId: "a146fc4e-94a1-4f6e-9f41-1856bfec0013",
+        name: "Japan",
+        environment: "mypurecloud.jp"
+    },
     dca : {
         clientId: "ed0ca151-ee0b-4f86-9f22-f321b743f4ec",
         name: "DCA",
@@ -72,14 +87,25 @@ $(document).ready(function(){
             $('#collapseOne').collapse('hide');
     }
 
+    $('#regionSelect').change(function() {
+        var region = $('#regionSelect').val()
+        if (region === 'na' ||
+            region === 'jp' ||
+            region === 'dca') {
+            $('#getorgsettings').prop("disabled",false);
+            $('#autofillwarning').hide();
+        } else {
+            $('#getorgsettings').prop("disabled",true);
+            $('#autofillwarning').show();
+        }
+    });
+
     pureCloudSession = new PureCloudSession(environments[$('#regionSelect').val()].environment);
     if(pureCloudSession.hasAuthorizationToken()){
         getOrgDetails();
     }
 
     $("#getorgsettings").click(function(){
-
-
         var clientId = environments[$('#regionSelect').val()].clientId;
 
         pureCloudSession.environment(environments[$('#regionSelect').val()].environment);
