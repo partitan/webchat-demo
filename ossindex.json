@@ -1,0 +1,16 @@
+
+{
+  "author": "ININ Developer Evangelists",
+  "title": "Web Chat Demo",
+  "logo_url": "https://raw.githubusercontent.com/MyPureCloud/purecloud_api_sdk_csharp/master/ininlogo64.png",
+  "categories": [
+    "chat"
+  ],
+  "tags": [
+  ],
+  "apis": [
+    "web chat"
+  ],
+  "sdks": [
+  ]
+}
