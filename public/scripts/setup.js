@@ -50,9 +50,10 @@ $(document).ready(function(){
     $('#queueName').show();
     $("#queueLoading").hide();
 
-    $('#agentAvatar').val(window.location.href.replace(/\/#/,'') + 'images/agent.jpg');
-    $('#companyLogoSmall').val(window.location.href.replace(/\/#/,'') + 'images/companylogo.png');
-    $('#companyLogo').val(window.location.href.replace(/\/#/,'') + 'images/companylogo.png');
+    var cdn = 'https://dhqbrvplips7x.cloudfront.net/webchat-demo/2/'
+    $('#agentAvatar').val(cdn + 'images/agent.jpg');
+    $('#companyLogoSmall').val(cdn + 'images/companylogo.png');
+    $('#companyLogo').val(cdn + 'images/companylogo.png');
 
     for (var i = 0; i < localStorage.length; i++){
         try{
