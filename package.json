@@ -21,6 +21,8 @@
   },
   "devDependencies" : {
       "grunt-bower-task" : "0.4.0",
-      "grunt": "~0.4.5"
+      "grunt": "~0.4.5",
+      "gulp": "^3.9.0",
+      "gulp-cdnify" :"1.0.7"
   }
 }
